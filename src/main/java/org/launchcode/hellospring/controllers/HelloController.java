@@ -31,15 +31,33 @@ public class HelloController {
         return "Hello " + name + "!";
     }
 
+    @GetMapping("greeting")
+    public static String createMessage(@RequestParam String name, @RequestParam String language){
+        switch(language){
+            case "english":
+                return "Hello " + name + "!";
+            case "spanish":
+                return "Hola " + name + "!";
+            case "japanese":
+                return "こんにちは " + name + "!";
+        }
+        return null;
+    }
+
     @RequestMapping("form")
     public String helloForm(){
         return "<html>" +
-                "<body>" +
-                "<form action='hello' method='post'>" +
-                "<input type='text' name='coder'>" +
-                "<input type='submit' value='Greet Me!'>" +
-                "</form>" +
-                "</body>" +
+                    "<body>" +
+                        "<form action='greeting' method='get'>" +
+                            "<input type='text' name='name'>" +
+                            "<select name='language' id='language'>" +
+                                "<option value='english'>English</option>" +
+                                "<option value='spanish'>Spanish</option>" +
+                                "<option value='japanese'>Japanese</option>" +
+                            "</select>" +
+                            "<input type='submit' value='Greet Me!'>" +
+                        "</form>" +
+                    "</body>" +
                 "</html>";
 
     }
